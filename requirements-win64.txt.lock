@@ -1,0 +1,7 @@
+numpy==1.24.1
+pathlib2==2.3.7.post1
+PyVISA==1.13.0
+rohdeschwarz==1.10.0.dev1
+ruamel.yaml==0.17.21
+six==1.16.0
+typing_extensions==4.4.0

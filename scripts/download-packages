@@ -1,0 +1,14 @@
+#!/usr/bin/env bash -o errexit
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+cd "$ROOT_DIR"
+
+
+DEST_DIR="$ROOT_DIR/artifacts/packages/macos"
+
+
+# clean destination
+rm -rf   "$DEST_DIR"
+mkdir -p "$DEST_DIR"
+
+# download macos packages
+pip download --requirement requirements.txt --dest "$DEST_DIR"

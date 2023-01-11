@@ -1,0 +1,10 @@
+#!/usr/bin/env bash -o errexit
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+cd "$ROOT_DIR"
+
+
+PACKAGE_DIR="$ROOT_DIR/artifacts/packages/macos"
+
+
+# install from artifacts
+pip install --no-index --find-links "$PACKAGE_DIR" --requirement requirements-win64.txt.lock
