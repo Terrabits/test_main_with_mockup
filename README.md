@@ -1,10 +1,14 @@
 # Test Main With Mockup
 
+A project to demonstrate mockups for testing.
+
+## Overview
+
 This project includes a class, [`Fsw`](project/fsw.py), which requires a TCP connection to an external resource.
 
 The `Fsw` class is then used in the [`main`](project/main.py) script, which requires this TCP connection to an external resource.
 
-For the purposes of testing, a [mock `Fsw`](project/mock/fsw.py) is also included. This mockup is used in `tests/test_main.py` to avoid the external resource requirement.
+For the purposes of testing, a [mock `Fsw`](project/mock/fsw.py) is also included. This mockup is used in `tests/test_main.py`; it is injected into the `main` script to avoid the external resource requirement.
 
 ## Requirements
 
