@@ -23,7 +23,7 @@ class Fsw:
 
     def preset(self):
         assert self.connected()
-        self._channels = {}
+        self._channels = {'SANALYZER': 'SAN'}
 
 
     # errors
