@@ -11,12 +11,22 @@ def main():
     fsw.clear_status()
     fsw.preset()
     assert not fsw.errors
-    assert not fsw.channels
+
+    # get default channel
+    assert len(fsw.channels) == 1
+    default_channel = fsw.channels[0]
 
     # create channel
     fsw.create_channel(name='My Channel', type='SAN')
     assert not fsw.errors
-    assert len(fsw.channels) == 1
+    assert 'My Channel' in fsw.channels
+
+    # delete default channel
+    fsw.delete_channel(default_channel)
+    assert not fsw.errors
+    assert fsw.channels == ['My Channel']
+
+
 
 
 if __name__ == '__main__':
