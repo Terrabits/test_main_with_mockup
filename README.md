@@ -14,35 +14,34 @@ This project includes a class, [`Fsw`](project/fsw.py), which requires a TCP con
 
 This project includes an executable script: [`packages/main.py`](project/main.py).
 
-This script imports  the `Fsw` class *at the module level*. Then, the imported `Fsw` class is used in the [`main`](project/main.py) script. Because it uses the Fsw class, `main` also requires a TCP connection to an external resource.
+This script imports  the `Fsw` class *at the module level*, as `main.Fsw`. Then, `main.Fsw` is used in the `main()` function: all references to `Fsw` in `main()` resolve to `main.Fsw`, since this `Fsw` is in scope.
+
+Note that because `main()` uses the `Fsw` class, `main()` also requires a TCP connection to an external resource.
 
 ### Mock `Fsw`
 
-For the purposes of testing, a [mock `Fsw`](project/mock/fsw.py) is also included. The mock `Fsw` does not require a TCP connection to an external resouerce. Instead, it provides a reasonable approximation of the behavior of `Fsw`.
+For the purposes of testing, a [mock `Fsw`](project/mock/fsw.py) is included. The mock `Fsw` does not require a TCP connection to an external resource. Instead, it provides a reasonable approximation of the behavior of `Fsw` without connecting to anything externally.
 
-### Inject Mocks into `main`
+#### Use Mock `Fsw` in tests
 
-The mock `Fsw` is used in `tests/test_main.py`, since the developer and testing environments most likely do not contain the TCP connection to an external resource.
+Recall that there is a module-level variable, `main.Fsw`, created by `import`.
 
-Furthermore, using a `mock` resource should speed up our tests considerably, which makes us much more likely to run them 😊.
+As noted above, references to `Fsw` in `main()` resolve to the *module-level* `main.Fsw` variable.
 
-#### Mock `Fsw` Module Injection
+We can use this fact to *inject* or replace `main.Fsw` with the mock `Fsw`, *before* running our `main` test code.
 
-We note that there is a module-level variable, `main.Fsw`, created by calling `import`.
-
-We also note that references to `Fsw` in the `main()` scope are actually references to the `main.Fsw` variable.
-
-We can use this information to *inject* or replace `main.Fsw` with the mock `Fsw` before running our `main` test code.
+In practice, this looks like:
 
 ```python
 from project          import main  # main module
 from project.mock.fsw import Fsw   # mock fsw
 # ...
 
-
 # use mock fsw for testing
 main.Fsw = Fsw
 ```
+
+After this injection, `main()` `Fsw` references, which resolve to `main.Fsw`, will now resolve to the Mock `Fsw`.
 
 See [`tests/test_main.py`](tests/test_main.py) for the complete test script.
 
