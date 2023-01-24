@@ -1,4 +1,6 @@
-class Fsw:
+print('in module project.mock.fsw')
+print('creating class MockFsw')
+class MockFsw:
 
     def __init__(self):
         self._open     = False

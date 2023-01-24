@@ -1,6 +1,8 @@
 from rohdeschwarz.instruments import GenericInstrument
 
 
+print('in module project.fsw')
+print('creating class Fsw')
 class Fsw(GenericInstrument):
 
     @property

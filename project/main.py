@@ -1,7 +1,12 @@
 from project.fsw import Fsw
 
 
+print('in module project.main')
+print(f'Fsw="{Fsw}"')
+print('creating function main()')
 def main():
+    print('main() was called')
+    print(f'Fsw={Fsw}')
     # connect to fsw
     fsw = Fsw()
     fsw.open_tcp('localhost')
